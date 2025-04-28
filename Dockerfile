@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:noble
 
 RUN set -eux; \
 	groupadd -g 1005 builder; \
@@ -19,10 +19,11 @@ RUN set -eux; \
 	gosu builder mkdir /home/builder/bin
 
 RUN set -eux; \
-	gosu builder bash -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"; \
+	gosu builder bash -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none"; \
 	gosu builder bash -c "curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/home/builder/bin sh"
 
-COPY --chown=builder:builder Cargo.toml Makefile arduboy-hello-rs.ino hello.rs /home/builder/arduboy-hello-rs/
+COPY --chown=builder:builder Cargo.lock Cargo.toml Makefile arduboy-hello-rs.ino hello.rs rust-toolchain.toml /home/builder/arduboy-hello-rs/
+COPY --chown=builder:builder .cargo/config.toml /home/builder/arduboy-hello-rs/.cargo/
 
 RUN set -eux; \
 	cd /home/builder/arduboy-hello-rs; \
