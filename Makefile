@@ -1,4 +1,4 @@
-.PHONY: all setup cargo build upload
+.PHONY: all setup cargo build upload clean
 
 -include options.mk
 
@@ -27,3 +27,9 @@ build: cargo
 
 upload:
 	arduino-cli upload --verify --fqbn $(BOARD) --port $(PORT)
+
+clean:
+	cargo clean
+
+cleanall: clean
+	rm -f options.mk
