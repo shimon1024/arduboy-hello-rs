@@ -1,0 +1,10 @@
+name: test
+on: [push]
+jobs:
+  test-all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Test
+        run: docker build .
