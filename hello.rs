@@ -166,12 +166,10 @@ fn tone(frequency: u16, duration: u16) {
 }
 
 #[lang = "eh_personality"]
-#[no_mangle]
-pub extern fn rust_eh_personality() {
+fn rust_eh_personality() {
 }
 
-#[lang = "panic_impl"]
-#[no_mangle]
-pub extern fn rust_begin_panic(_info: &PanicInfo) -> ! {
+#[panic_handler]
+fn panic_handler(_info: &PanicInfo) -> ! {
     intrinsics::abort()
 }
