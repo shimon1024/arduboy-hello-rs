@@ -58,7 +58,7 @@ impl Environment {
 
 #[derive(PartialEq, Eq, Clone, Copy)]
 struct ButtonSet {
-    flag_set: u8,
+    flag_set: u8
 }
 
 impl ButtonSet {
