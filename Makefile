@@ -9,7 +9,7 @@ else
 endif
 
 BOARD = arduino:avr:leonardo
-RECIPE = "$$(arduino-cli compile -b $(BOARD) --show-properties \
+RECIPE = "$$(arduino-cli compile -b $(BOARD) --show-properties=unexpanded \
 		| grep -E '^recipe\.c\.combine\.pattern=.*$$' \
 		| sed -r 's@(.*)@\1 target/avr-none/release/libhello.a@')"
 
