@@ -1,2 +1,5 @@
 [build]
 rustflags = ["-C", "target-cpu=atmega32u4"]
+
+[unstable]
+build-std = ["core"]

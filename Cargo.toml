@@ -1,8 +1,17 @@
 [package]
 name = 'hello'
-version = '2.0.0'
-authors = ['Itoh Shimon <shimon@postfixnotation.org>']
+version = '3.0.0'
+edition = "2024"
 
 [lib]
 crate-type = ['staticlib']
 path = 'hello.rs'
+
+[dependencies]
+panic-abort = "0.3"
+
+# use only release
+[profile.release]
+panic = "abort"
+opt-level = "s"
+lto = true

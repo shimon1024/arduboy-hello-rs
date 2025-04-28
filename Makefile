@@ -17,8 +17,6 @@ RECIPE = "$$(arduino-cli compile -b $(BOARD) --show-properties \
 all: build
 
 setup:
-	rustup override set nightly
-	rustup component add rust-src --toolchain nightly
 	rustc --print target-spec-json -Z unstable-options \
 		--target avr-none -C target-cpu=atmega32u4 \
 		> $(TARGET).json
@@ -26,7 +24,7 @@ setup:
 	arduino-cli lib install Arduboy
 
 cargo:
-	cargo build -Z build-std=core --target $(TARGET).json --release
+	cargo build --target $(TARGET).json --release
 
 build: cargo
 	arduino-cli compile --fqbn $(BOARD) --build-property $(RECIPE)
