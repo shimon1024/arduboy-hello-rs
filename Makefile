@@ -9,22 +9,18 @@ else
 endif
 
 BOARD = arduino:avr:leonardo
-TARGET = avr-none-atmega32u4
 RECIPE = "$$(arduino-cli compile -b $(BOARD) --show-properties \
 		| grep -E '^recipe\.c\.combine\.pattern=.*$$' \
-		| sed -r 's@(.*)@\1 target/$(TARGET)/release/libhello.a@')"
+		| sed -r 's@(.*)@\1 target/avr-none/release/libhello.a@')"
 
 all: build
 
 setup:
-	rustc --print target-spec-json -Z unstable-options \
-		--target avr-none -C target-cpu=atmega32u4 \
-		> $(TARGET).json
 	arduino-cli core install arduino:avr
 	arduino-cli lib install Arduboy
 
 cargo:
-	cargo build --target $(TARGET).json --release
+	cargo build --release
 
 build: cargo
 	arduino-cli compile --fqbn $(BOARD) --build-property $(RECIPE)

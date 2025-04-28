@@ -1,4 +1,3 @@
 target
 Cargo.lock
-avr-none-atmega32u4.json
 options.mk

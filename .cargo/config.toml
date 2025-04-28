@@ -1,4 +1,5 @@
 [build]
+target = "avr-none"
 rustflags = ["-C", "target-cpu=atmega32u4"]
 
 [unstable]
