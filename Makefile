@@ -1,4 +1,4 @@
-.PHONY: all setup cargo build upload clean
+.PHONY: all setup cargo build upload clean cleanall
 
 -include options.mk
 
